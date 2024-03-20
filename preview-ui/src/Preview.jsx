@@ -1,4 +1,4 @@
-import { Home, TrendingUp, Search, ArrowRight } from 'lucide-react';
+import { Home, RefreshCw, TrendingUp, Search, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -6,26 +6,17 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { ResponsiveLine } from '@nivo/line';
-import { useState } from 'react';
-
 const ExchangeRateApp = () => {
-  const [baseCurrency, setBaseCurrency] = useState('USD');
-  const [targetCurrency, setTargetCurrency] = useState('EUR');
-  const [amount, setAmount] = useState(1);
-  const [exchangeRate, setExchangeRate] = useState(0.84);
-  const [loading, setLoading] = useState(false);
-
-  const handleConvert = () => {
-    setLoading(true);
-    // Simulate API call
-    setTimeout(() => {
-      setExchangeRate(0.84); // Mock exchange rate
-      setLoading(false);
-    }, 2000);
-  };
+  const exchangeRateData = [
+    { x: "2021-01-01", y: 0.85 },
+    { x: "2021-02-01", y: 0.83 },
+    { x: "2021-03-01", y: 0.82 },
+    { x: "2021-04-01", y: 0.84 },
+    { x: "2021-05-01", y: 0.85 },
+  ];
 
   return (
-    (<div className="flex flex-col h-screen bg-gradient-to-r from-blue-400 to-purple-500 text-white">
+    <div className="flex flex-col h-screen bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 text-white">
       <header className="p-4 shadow-md bg-opacity-20 backdrop-filter backdrop-blur-lg">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold">ExchangeRate</h1>
@@ -45,11 +36,11 @@ const ExchangeRateApp = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="amount" className="block mb-2 text-sm font-medium">Amount</label>
-                  <Input id="amount" type="number" value={amount} onChange={(e) => setAmount(e.target.value)} className="text-black" />
+                  <Input id="amount" type="number" defaultValue="1" className="text-black" />
                 </div>
                 <div>
                   <label htmlFor="base-currency" className="block mb-2 text-sm font-medium">From</label>
-                  <Select id="base-currency" value={baseCurrency} onChange={(value) => setBaseCurrency(value)} className="text-black">
+                  <Select id="base-currency" defaultValue="USD" className="text-black">
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
@@ -61,7 +52,7 @@ const ExchangeRateApp = () => {
                 </div>
                 <div>
                   <label htmlFor="target-currency" className="block mb-2 text-sm font-medium">To</label>
-                  <Select id="target-currency" value={targetCurrency} onChange={(value) => setTargetCurrency(value)} className="text-black">
+                  <Select id="target-currency" defaultValue="EUR" className="text-black">
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
@@ -72,23 +63,20 @@ const ExchangeRateApp = () => {
                   </Select>
                 </div>
                 <div className="flex items-end mb-4">
-                  <Button onClick={handleConvert} className="w-full">
-                    {loading ? 'Converting...' : 'Convert'}
+                  <Button className="w-full">
+                    Convert
                   </Button>
                 </div>
               </div>
-              {loading && <div className="mt-4" value={50} />}
-              {!loading && (
-                <Alert className="mt-4">
-                  <div className="h-6 w-6" />
-                  <AlertTitle>{amount} {baseCurrency} =</AlertTitle>
-                  <AlertDescription>{(amount * exchangeRate).toFixed(2)} {targetCurrency}</AlertDescription>
-                </Alert>
-              )}
+              <Alert className="mt-4">
+                <RefreshCw className="h-6 w-6" />
+                <AlertTitle>1 USD =</AlertTitle>
+                <AlertDescription>0.84 EUR</AlertDescription>
+              </Alert>
             </CardContent>
             <CardFooter>
               <div className="flex justify-between items-center">
-                <p className="text-sm">1 {baseCurrency} = {exchangeRate} {targetCurrency}</p>
+                <p className="text-sm">Updated 1 min ago</p>
                 <Button variant="outline" className="text-white border-white">
                   <TrendingUp className="w-4 h-4 mr-2" />
                   View Historical Rates
@@ -100,18 +88,7 @@ const ExchangeRateApp = () => {
             <AspectRatio ratio={16 / 9} className="bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-md">
               <div className="w-full h-full">
                 <ResponsiveLine
-                  data={[
-                    {
-                      id: "exchange-rate",
-                      data: [
-                        { x: "2021-01-01", y: 0.85 },
-                        { x: "2021-02-01", y: 0.83 },
-                        { x: "2021-03-01", y: 0.82 },
-                        { x: "2021-04-01", y: 0.84 },
-                        { x: "2021-05-01", y: 0.85 },
-                      ],
-                    },
-                  ]}
+                  data={[{ id: "exchange-rate", data: exchangeRateData }]}
                   margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
                   xScale={{ type: "point" }}
                   yScale={{ type: "linear", min: "auto", max: "auto" }}
@@ -183,7 +160,7 @@ const ExchangeRateApp = () => {
           </div>
         </div>
       </footer>
-    </div>)
+    </div>
   );
 };
 
