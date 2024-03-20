@@ -4,8 +4,8 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Button } from '@/components/ui/button';
 export default function PaymentSolutionsPage() {
   return (
-    <div className="flex flex-col lg:flex-row items-center justify-center min-h-screen bg-blue-100 p-8">
-      <Card className="max-w-md mx-4 bg-white rounded-lg shadow-md">
+    <div className="flex flex-row items-center justify-between min-h-screen bg-blue-100 p-8">
+      <Card className="flex-1 max-w-md mx-4 bg-white rounded-lg shadow-md">
         <CardHeader className="flex items-center space-x-4 p-4 border-b">
           <Home className="w-6 h-6 text-blue-600" />
           <CardTitle>POS Collection</CardTitle>
@@ -24,7 +24,7 @@ export default function PaymentSolutionsPage() {
         </CardContent>
       </Card>
 
-      <div className="max-w-md mx-4 bg-white rounded-lg shadow-md p-8 text-center">
+      <div className="flex-1 max-w-md mx-4 bg-white rounded-lg shadow-md p-8 text-center">
         <div className="flex justify-center mb-4">
           <MessageCircle className="w-6 h-6 text-blue-600" />
         </div>
