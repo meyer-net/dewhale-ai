@@ -1,3 +1,4 @@
+import { Home } from 'lucide-react';
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink } from '@/components/ui/navigation-menu';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -8,8 +9,9 @@ import React from 'react';
 
 const ExchangeSite = () => {
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="bg-white p-4 shadow-md">
+    (<div className="flex flex-col min-h-screen">
+      <div title="Currency Exchange" description="Convert currencies in real-time." />
+      <div className="bg-white p-4 shadow-md">
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
@@ -36,8 +38,7 @@ const ExchangeSite = () => {
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-      </header>
-      
+      </div>
       <main className="flex-1 overflow-y-auto p-4 bg-gray-100">
         <section aria-labelledby="currency-converter-heading">
           <h2 id="currency-converter-heading" className="text-xl font-bold mb-4">Currency Converter</h2>
@@ -94,12 +95,12 @@ const ExchangeSite = () => {
               <TableRow>
                 <TableCell>USD/EUR</TableCell>
                 <TableCell>0.85</TableCell>
-                <TableCell>↗</TableCell>
+                <TableCell>↑</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>USD/GBP</TableCell>
                 <TableCell>0.75</TableCell>
-                <TableCell>↘</TableCell>
+                <TableCell>↓</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>EUR/GBP</TableCell>
@@ -110,11 +111,10 @@ const ExchangeSite = () => {
           </Table>
         </section>
       </main>
-      
-      <footer className="bg-white p-4 shadow-md">
+      <div className="bg-white p-4 shadow-md">
         <p className="text-center text-sm text-gray-500">© 2021 ExchangeSite, Inc. All rights reserved.</p>
-      </footer>
-    </div>
+      </div>
+    </div>)
   );
 };
 
